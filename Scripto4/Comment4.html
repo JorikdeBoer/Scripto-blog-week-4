@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <!-- The writing page of the Scripto blog application -->
+        <!-- The comment page of the Scripto blog application -->
         <title>	Scripto Blog application </title>
         
         <!-- Link to css style file -->
@@ -16,8 +16,8 @@
  
     <script>
     
-    // Send written blog message to database 
-    function submitmessage() {
+    // Send written comment message to database 
+    function submitcomment() {
         var author = document.bloginput.author.value; 
         var title = document.bloginput.title.value;  
         var blog = document.bloginput.text.value;  
@@ -73,7 +73,7 @@
     
     <!-- Insert background with clouds -->
     <body background="achtergrond.jpg"> 
-      <!--Build-up of submit page -->
+      <!--Build-up of comment page -->
       <div id="Total">
         <div id="Menu">
             <div id="Welcome">
@@ -91,28 +91,13 @@
                 <div style="clear:both"></div>  
             </div>    
             
-            <!-- Inputbox: Your written blog with author, title, category & text-->
+            <!-- Inputbox: Your written comment with title of the blog the comment is directed to & your comment itself-->
             <div id="Inputbox">    
               <form name="bloginput" action="" method="post">
-                Auteur: <input type="text" name="author"><br><br>
-                Titel: <input type="text" name="title"><br><br>
-                Categorie: 
-                <input name="category" type="text" list="categories" />
-                <datalist id="categories">
-                  <option value="vuur">vuur</option>
-                  <option value="water">water</option>
-                  <option value="aarde">aarde</option>
-                  <option value="lucht">lucht</option>
-                </datalist><br><br> 
-                <!-- <select name="category">
-                //<option selected value="water">Lucht (luchtige verhalen)</option>
-                //<option value="aarde">Aarde (aardige verhalen)</option>
-                //<option value="vuur">Water (kabbelende verhalen)</option>
-                //<option value="lucht">Vuur (vurige verhalen)</option>
-                </select><br><br> -->
-                Tekst: <textarea id="submit" name="text" rows="20" cols="90"></textarea>
+                Titel van bijbehorende blog: <input type="text" name="title"><br><br>
+                Jouw commentaar: <textarea id="submit" name="text" rows="20" cols="90"></textarea>
                 <!-- Button to submit the new written blog to the database -->
-                <input type="button" name="publiceer" onClick="submitmessage();" value="Publiceer" />  
+                <input type="button" name="publiceer" onClick="submitcomment();" value="Publiceer commentaar" />  
                   
               </form>
             </div> 
