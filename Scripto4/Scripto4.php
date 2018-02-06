@@ -93,7 +93,7 @@
         }
         
         // Check if there is a comment to put in the database
-        if (isset( $_POST["mycomment"] )){
+        elseif (isset( $_POST["mycomment"] )){
             
                 $servername = "localhost";
                 $username = "root";
@@ -188,7 +188,7 @@
         
         // Check if there is a blog titel selection in the request: 
         // get comments for certain blog!
-        if (isset( $_GET["titel_blog"] )){
+        elseif (isset( $_GET["titel_blog"] )){
                 
                 $servername = "localhost";
                 $username = "root";
@@ -201,12 +201,39 @@
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
                 // Get category_id
-                $sql = "SELECT comment, titel_blog FROM comments WHERE titel_blog = '$titel_blog'";
+                $sql = "SELECT comment, comment_id FROM comments WHERE titel_blog = '$titel_blog'";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) { 
                     while($row = $result->fetch_assoc()) {    
-                    echo "Titel blog: " . $row["titel_blog"]. "\r\n"; 
+                    echo "Comment_ID: " . $row["comment_id"]. "\r\n"; 
                     echo "Comment: " . $row["comment"]. "\r\n" ;
+                    }
+                }
+                else {
+                    echo "0 results";
+                }
+                $conn->close();
+        }
+        
+        // Check if there is the all_blogs keyword in the request: 
+        // get comments for certain blog!
+        elseif (isset( $_GET["all_blogs"] )){
+                
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+                // Get category_id
+                $sql = "SELECT titel_blog FROM blogs";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {    
+                    echo "Titel blog: " . $row["titel_blog"]. " , "; 
                     }
                 }
                 else {
