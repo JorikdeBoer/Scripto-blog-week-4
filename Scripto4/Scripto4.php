@@ -7,11 +7,38 @@
 
     //Global variable
     $blogs_numbers = array();
-
-    // Code to put new blogs in the database with author, title, text and category
+    
+    // Code to delete comments
     if ($verb == 'POST'){
+        //Check if there is a comment_id to remove comment
+        if (isset( $_POST["comment_id"] )){
+            
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                $comment_id = $_POST["comment_id"];
+                
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+            
+                // Delete comment from comment database
+                $sql = "DELETE FROM comments WHERE comment_id = '$comment_id'";
+           
+                // Check if comment has been deleted
+                if ($conn->query($sql) === TRUE) {
+                    echo "Record deleted successfully";
+                } else {
+                    echo "Error deleting record: " . $conn->error;
+                } 
+            $conn->close();   
+        }
+
         // Check if there is a blog to put in the database
-        if (isset( $_POST["myblog"] )){
+        elseif (isset( $_POST["myblog"] )){
             
                 $servername = "localhost";
                 $username = "root";
