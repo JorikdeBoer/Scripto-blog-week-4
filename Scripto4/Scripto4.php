@@ -5,6 +5,9 @@
 
     $verb = $_SERVER['REQUEST_METHOD'];
 
+    //Global variable
+    $blogs_numbers = array();
+
     // Code to put new blogs in the database with author, title, text and category
     if ($verb == 'POST'){
         // Check if there is a blog to put in the database
@@ -92,7 +95,7 @@
                 die("Error: the required parameters are missing.");    
         }
     }
-
+    
     // Code to put blogs from the database to the webpage
     if ($verb == 'GET'){
         // Check if there is a category selection in the request: 
@@ -126,31 +129,33 @@
                     while($row = $result->fetch_assoc()) {
                     //echo "Blog_id: " . $row["blog_id"]. "\r\n" ;    
                     //echo "Blog_number: " . $row["blog_id"]. "\r\n";  
-                    $blog_number = $row['blog_id'];    
-                    
-                    // Get blogs with the blog_id's based on the category_id    
-                    $sql = "SELECT blog_id, tekst, auteur, titel FROM blogs WHERE blog_id= '$blog_number' ORDER BY blog_id DESC";
+                    $blog_number = $row['blog_id'];  
+                    //$blogs_numbers = array();
+                    array_push($blogs_numbers, "$blog_number");
+                    }
+                }    
+
+                // Get blogs with the blog_id's based on the category_id  
+                $length = count($blogs_numbers);
+                //print_r($blogs_numbers);
+                for ($i = 0; $i < $length; $i++) {        
+                    $sql = "SELECT blog_id, tekst, auteur, titel FROM blogs WHERE blog_id= '$blogs_numbers[$i]' ORDER BY blog_id DESC";
                     $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            // Output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo "\r\n Auteur: " . $row["auteur"]. "\r\n";
-                                echo "Titel: " . $row["titel"]. "\r\n"; 
-                                echo "Categorie: " .$category. "\r\n" ;
-                                echo "Blog: " . $row["tekst"]. "\r\n" ;
+                    if ($result->num_rows > 0) {
+                            //Output data of each row
+                            while($row2 = $result->fetch_assoc()) {
+                               echo "\r\n Auteur: " . $row2["auteur"]. "\r\n";
+                               echo "Titel: " . $row2["titel"]. "\r\n"; 
+                               echo "Categorie: " .$category. "\r\n" ;
+                               echo "Blog: " . $row2["tekst"]. "\r\n" ;
                             }
-                        }
-                    }     
-                }
-            
-                //else {
-                //    echo "0 results"; 
-                //}
-                $conn->close(); 
-        }
-        
-        // No category selection in the request: get all blogs!
-        else {    
+                     }
+                }    
+            $conn->close(); 
+            }
+    
+    // No category selection in the request: get all blogs!
+    else {    
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -176,6 +181,7 @@
                     echo "0 results";
                 }
                 $conn->close();
-        }
     }
+    }
+    
 ?>

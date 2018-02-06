@@ -6,7 +6,7 @@
         <title>	Scripto Blog application </title>
         
         <!-- Link to css style file -->
-        <link type="text/css" rel="stylesheet" href="Scripto4.css" />
+        <link type="text/css" rel="stylesheet" href="Comment4.css" />
 	    <meta charset="utf-8">
           
         <script>                   
@@ -92,14 +92,27 @@
             </div>    
             
             <!-- Inputbox: Your written comment with title of the blog the comment is directed to & your comment itself-->
-            <div id="Inputbox">    
-              <form name="bloginput" action="" method="post">
+            <div id="Inputbox"> 
+             <h1>Schrijf hier je commentaar!</h1>
+              <form name="bloginput" action="" method="post">  
                 Titel van bijbehorende blog: <input type="text" name="title"><br><br>
-                Jouw commentaar: <textarea id="submit" name="text" rows="20" cols="90"></textarea>
+                Jouw commentaar: <textarea id="submit" name="text" rows="5" cols="90"></textarea>
                 <!-- Button to submit the new written blog to the database -->
-                <input type="button" name="publiceer" onClick="submitcomment();" value="Publiceer commentaar" />  
-                  
+                <input type="button" name="publiceer" onClick="submitcomment();" value="Publiceer commentaar" />
               </form>
+                
+            <!-- Outputbox: All the blogs with author, title & text ordered by descending ID numbers -->
+            <form name="output" action="">  
+              <div id="Outputbox">    
+                <div class="column">
+                  <h1>Lees hier het laatste commentaar, wellicht van uw hand!</h1>
+                  <textarea name="outputtext" cols="90" rows="12">
+                  </textarea>
+                <!-- Button to refresh the outputbox to include new posted blogs since page was loaded -->  
+                <input type="button" name="ververs" onClick="getcomments();" value="Ververs comments" />    
+                </div>
+              </div> 
+            </form>    
             </div> 
         </div>
       </div>       

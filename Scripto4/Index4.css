@@ -6,7 +6,7 @@
 body {
     background="achtergrond.jpg">  
 	padding: 35px;
-    margin: 80px;
+    margin: 30px;
   	font: 18px Georgia, Serif; 	 
 	text-align: center; 
 	}
@@ -15,12 +15,11 @@ h1 {
     font: 18px Georgia, Serif; 	
     text-align: center;
     color: solid rgb(255, 255, 255);
-    text-transform: uppercase;
     }
 
 #Total{
     margin:0 auto;
-    padding-bottom:25px;
+    padding-bottom:10px;
     background:rgb(153, 0, 0);
     width:60%;
     border:1px solid rgb(0, 0, 0);}
