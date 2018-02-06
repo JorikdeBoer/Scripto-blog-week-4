@@ -37,7 +37,7 @@
                     die("Connection failed: " . $conn->connect_error);}
                     
                 // Insert blog into blog database
-                $sql = "INSERT INTO blogs (titel, auteur, tekst)".
+                $sql = "INSERT INTO blogs (titel_blog, auteur, tekst)".
                 "VALUES ('$title', '$author', '$text')";
                 // Check of a new entry in database has been created
                 if ($conn->query($sql) === TRUE) {
@@ -91,6 +91,38 @@
                     echo "Error: " . $sql . "<br>" . $conn->error;}      
                 $conn->close();        
         }
+        
+        // Check if there is a comment to put in the database
+        if (isset( $_POST["mycomment"] )){
+            
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                $posttext = $_POST["mycomment"];
+                $posttitle = $_POST["titel_blog"];
+                
+                // Translation to make blogs with ' in the text possible
+                $text = str_replace("'", "''", "$posttext");
+                $title = str_replace("'", "''", "$posttitle");
+            
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+                    
+                // Insert blog into blog database
+                $sql = "INSERT INTO comments (comment, titel_blog)".
+                "VALUES ('$text', '$title')";
+                // Check of a new entry in database has been created
+                if ($conn->query($sql) === TRUE) {
+                    echo "New record created successfully";} 
+                else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;}
+                    
+                $conn->close(); 
+        }
         else {
                 die("Error: the required parameters are missing.");    
         }
@@ -139,23 +171,52 @@
                 $length = count($blogs_numbers);
                 //print_r($blogs_numbers);
                 for ($i = 0; $i < $length; $i++) {        
-                    $sql = "SELECT blog_id, tekst, auteur, titel FROM blogs WHERE blog_id= '$blogs_numbers[$i]' ORDER BY blog_id DESC";
+                    $sql = "SELECT blog_id, tekst, auteur, titel_blog FROM blogs WHERE blog_id= '$blogs_numbers[$i]' ORDER BY blog_id DESC";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                             //Output data of each row
-                            while($row2 = $result->fetch_assoc()) {
-                               echo "\r\n Auteur: " . $row2["auteur"]. "\r\n";
-                               echo "Titel: " . $row2["titel"]. "\r\n"; 
+                            while($row = $result->fetch_assoc()) {
+                               echo "\r\n Auteur: " . $row["auteur"]. "\r\n";
+                               echo "Titel: " . $row["titel_blog"]. "\r\n"; 
                                echo "Categorie: " .$category. "\r\n" ;
-                               echo "Blog: " . $row2["tekst"]. "\r\n" ;
+                               echo "Blog: " . $row["tekst"]. "\r\n" ;
                             }
                      }
                 }    
             $conn->close(); 
             }
-    
-    // No category selection in the request: get all blogs!
-    else {    
+        
+        // Check if there is a blog titel selection in the request: 
+        // get comments for certain blog!
+        if (isset( $_GET["titel_blog"] )){
+                
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                $titel_blog = $_GET["titel_blog"];
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+                // Get category_id
+                $sql = "SELECT comment, titel_blog FROM comments WHERE titel_blog = '$titel_blog'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {    
+                    echo "Titel blog: " . $row["titel_blog"]. "\r\n"; 
+                    echo "Comment: " . $row["comment"]. "\r\n" ;
+                    }
+                }
+                else {
+                    echo "0 results";
+                }
+                $conn->close();
+        }
+        
+        // No category selection in the request: get all blogs!
+        else {    
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -166,14 +227,14 @@
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
-                $sql = "SELECT blog_id, tekst, auteur, titel FROM blogs ORDER BY blog_id DESC";
+                $sql = "SELECT blog_id, tekst, auteur, titel_blog FROM blogs ORDER BY blog_id DESC";
                 $result = $conn->query($sql);
                 //print_r($result);
                 if ($result->num_rows > 0) {
                     // Output data of each row
                     while($row = $result->fetch_assoc()) {  
                         echo "\r\n Auteur: " . $row["auteur"]. "\r\n";
-                        echo "Titel: " . $row["titel"]. "\r\n"; 
+                        echo "Titel: " . $row["titel_blog"]. "\r\n"; 
                         echo "Blog: " . $row["tekst"]. "\r\n" ;
                     }
                 } 

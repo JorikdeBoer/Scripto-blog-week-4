@@ -15,20 +15,48 @@
         
  
     <script>
-    
-    // Send written comment message to database 
+       
+    //Global variable
+    var chosen_blog = document.bloginput.blog.value;
+        
+    // Send written comment to database 
     function submitcomment() {
-        var author = document.bloginput.author.value; 
-        var title = document.bloginput.title.value;  
-        var blog = document.bloginput.text.value;  
-        var category = document.bloginput.category.value; 
+        var comment = document.bloginput.text.value;  
+        var titel_blog= document.bloginput.title.value; 
         var xhr = new XMLHttpRequest();  
-        var value = "myblog=" + blog + "&author=" + author + "&title=" + title + "&category=" + category;
+        var value = "mycomment=" + comment + "&titel_blog=" + titel_blog;
         xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
         console.log(value);
         xhr.send(value);       
     }
+        
+    // Get comments from certain blog from database to publish on site
+    function getblogcomments() {
+        var xhr = new XMLHttpRequest();     
+        var titel_blog = document.output.blog.value;
+        console.log(titel_blog);
+        var url = "http://localhost/Scripto4/Scripto4.php?titel_blog="+titel_blog;
+        xhr.open('GET', url, true);
+        xhr.onload = function (e) {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                    // The reponse contains all blogs from the input category in the databse 
+                    // with author, title and blog (ordered by descending ID numbers)    
+                    document.output.outputtext.value =
+                    xhr.response;
+                    console.log(xhr.responseText);
+                } 
+                else {
+                    console.error(xhr.statusText);
+                } 
+            }
+        }; 
+        xhr.onerror = function (e) {
+              console.error(xhr.statusText);
+        };
+        xhr.send(null); 
+    }        
         
     // Make autocomplete text epander possible
     // self defined shortcuts list    
@@ -101,15 +129,19 @@
                 <input type="button" name="publiceer" onClick="submitcomment();" value="Publiceer commentaar" />
               </form>
                 
-            <!-- Outputbox: All the blogs with author, title & text ordered by descending ID numbers -->
+            <!-- Outputbox: All the commets for a certain blog -->
             <form name="output" action="">  
               <div id="Outputbox">    
                 <div class="column">
                   <h1>Lees hier het laatste commentaar, wellicht van uw hand!</h1>
+                <input name="blog" type="text" list="blogs" />
+                <datalist id="blogs">
+                  <option value="Commentaar">Commentaar</option>
+                </datalist><br><br>     
                   <textarea name="outputtext" cols="90" rows="12">
                   </textarea>
-                <!-- Button to refresh the outputbox to include new posted blogs since page was loaded -->  
-                <input type="button" name="ververs" onClick="getcomments();" value="Ververs comments" />    
+                <!-- Button to refresh the outputbox to include new posted blogs since page was loaded --> 
+                <input type="button" name="ververs" onClick="getblogcomments()" value="Ververs comments" />    
                 </div>
               </div> 
             </form>    
