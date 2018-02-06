@@ -86,7 +86,7 @@
                 }
                 $conn->close();      
                 
-                 // Create connection
+                 // Create connection in special table
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
                 if ($conn->connect_error) {
@@ -170,6 +170,7 @@
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
+            
                 // Get category_id
                 $sql = "SELECT category_id FROM categories WHERE category = '$category'";
                 $result = $conn->query($sql);

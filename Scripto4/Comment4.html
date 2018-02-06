@@ -13,7 +13,6 @@
         </script>     
      </head>
         
- 
     <script>
     // Test getblogtitles function
     getblogtitles();
@@ -22,12 +21,17 @@
     function submitcomment() {
         var comment = document.bloginput.text.value;  
         var titel_blog= document.bloginput.title.value; 
-        var xhr = new XMLHttpRequest();  
-        var value = "mycomment=" + comment + "&titel_blog=" + titel_blog;
-        xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
-        console.log(value);
-        xhr.send(value);       
+        if(titel_blog = "Openingsblog"){
+        alert("Not possible to comment on the selected blog");    
+        }
+        else{
+            var xhr = new XMLHttpRequest();  
+            var value = "mycomment=" + comment + "&titel_blog=" + titel_blog;
+            xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
+            console.log(value);
+            xhr.send(value); 
+        }
     }
         
     // Delete single comment of comment_id
@@ -67,34 +71,6 @@
         };
         xhr.send(null); 
     }   
-        
-    // Get all blogtitles WORK IN PROGRESS
-    function getblogtitles() {  
-        var xhr = new XMLHttpRequest();     
-        var all_blogs = "all_blogs";
-        var url = "http://localhost/Scripto4/Scripto4.php?all_blogs="+all_blogs;
-        xhr.open('GET', url, true);
-        xhr.onload = function (e) {
-            if (xhr.readyState === xhr.DONE) {
-                if (xhr.status === 200) {
-                    // The reponse contains all blogs from the input category in the databse 
-                    // with author, title and blog (ordered by descending ID numbers)    
-                    //document.output.outputtext.value =
-                    //xhr.response;
-                    console.log(xhr.responseText);
-                    var output = xhr.response;
-                    return output;
-                } 
-                else {
-                    console.error(xhr.statusText);
-                } 
-            }
-        }; 
-        xhr.onerror = function (e) {
-              console.error(xhr.statusText);
-        };
-        xhr.send(null); 
-    }
         
     // Make autocomplete text epander possible
     // self defined shortcuts list    
@@ -150,7 +126,7 @@
 
             <!-- Navigation bar links -->
             <div class="topnav">
-                <a href="Index4.html">Menu</a>
+                <a href="Index4.html">Blogs</a>
                 <a href="Category4.html">Categorieën</a>
                 <a href="Scripto4.html">Schrijf zelf!</a>
                 <a href="Comment4.html">Commentaar</a>
