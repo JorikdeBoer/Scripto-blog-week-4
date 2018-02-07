@@ -12,14 +12,14 @@
     if ($verb == 'POST'){
         
         // Check if there is a category to add to the list
-        if (isset( $_POST["mycategory"])){
+        if (isset( $_POST["mycategory"] )){
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "scripto4"; 
                 $newcategory = $_POST["mycategory"];
             
-                 // Create connection
+                // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
                 if ($conn->connect_error) {
@@ -183,14 +183,15 @@
     
     // Code to put blogs from the database to the webpage
     if ($verb == 'GET'){
-        // Check if there is a category selection in the request: 
-        // get blogs from certain category!
+        
+        // Get blogs from certain category!
         if (isset( $_GET["category"] )){
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "scripto4"; 
                 $category = $_GET["category"];
+            
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
@@ -237,13 +238,37 @@
                             }
                      }
                 }    
-            $conn->close(); 
-            }
+                $conn->close(); 
+        }
+        
+        // Get all available category names!
+        elseif (isset( $_GET["categories"] )){
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                 // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+                // Get categories
+                $sql = "SELECT category FROM categories";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {      
+                    echo "" . $row["category"]. "  " ;
+                    }   
+                }
+                else {
+                    echo "0 results";
+                }  
+                $conn->close(); 
+        }
         
         // Check if there is a blog titel selection in the request: 
         // get comments for certain blog!
         elseif (isset( $_GET["titel_blog"] )){
-                
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
@@ -323,7 +348,7 @@
                     echo "0 results";
                 }
                 $conn->close();
-    }
+        }
     }
     
 ?>
