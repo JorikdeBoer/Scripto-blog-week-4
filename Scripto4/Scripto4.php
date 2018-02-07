@@ -10,8 +10,34 @@
     
     // Code to delete comments
     if ($verb == 'POST'){
-        //Check if there is a comment_id to remove comment
-        if (isset( $_POST["comment_id"] )){
+        
+        // Check if there is a category to add to the list
+        if (isset( $_POST["mycategory"])){
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "scripto4"; 
+                $newcategory = $_POST["mycategory"];
+            
+                 // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);}
+            
+                // Add category to category database
+                $sql = "INSERT INTO categories (category)".
+                    "VALUES ('$newcategory')";
+                    // Check of a new entry in database has been created
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";} 
+                    else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;} 
+                $conn->close();           
+        }
+        
+        // Check if there is a comment_id to remove comment
+        elseif (isset( $_POST["comment_id"] )){
             
                 $servername = "localhost";
                 $username = "root";
@@ -72,7 +98,7 @@
                 else {
                     echo "Error: " . $sql . "<br>" . $conn->error;}
                     
-                // Insert category if category is absent in category database    
+                // Insert category if category is absent in category database
                 $sql = "SELECT category FROM categories WHERE category = '$category'";
                 $result = $conn->query($sql);
                 if ($result->num_rows == 0) {    

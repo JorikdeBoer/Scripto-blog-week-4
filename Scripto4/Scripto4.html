@@ -16,6 +16,17 @@
  
     <script>
     
+    // Add category to category list
+    function submitcategory() {
+        var newcategory = document.bloginput.nieuwcategorie.value; 
+        var xhr = new XMLHttpRequest();  
+        var value = "mycategory=" + newcategory;
+        xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
+        console.log(value);
+        xhr.send(value);           
+    }
+        
     // Send written blog message to database 
     function submitmessage() {
         var author = document.bloginput.author.value; 
@@ -92,7 +103,7 @@
             </div>    
             
             <!-- Inputbox: Your written blog with author, title, category & text-->
-            <div id="Inputbox">    
+            <div id="Inputbox"> <br>   
               <form name="bloginput" action="" method="post">
                 Auteur: <input type="text" name="author"><br><br>
                 Titel: <input type="text" name="title"><br><br>
@@ -103,7 +114,10 @@
                   <option value="water">water</option>
                   <option value="aarde">aarde</option>
                   <option value="lucht">lucht</option>
-                </datalist><br><br> 
+                </datalist><br><br>
+                  
+                Zelf categorie aanmaken: <input type="text" name="nieuwcategorie">
+                <input type="button" name="categorietoevoegen" onClick="submitcategory();" value="Voeg categorie toe aan lijst" /><br><br>  
                 <!-- <select name="category">
                 //<option selected value="water">Lucht (luchtige verhalen)</option>
                 //<option value="aarde">Aarde (aardige verhalen)</option>
