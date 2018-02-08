@@ -74,6 +74,7 @@
                 $posttitle = $_POST["title"];
                 $postauthor = $_POST["author"];
                 $postcategory = $_POST["category"];
+                $postextracategory = $_POST["extracategory"];
                 $category_number = "";
                 $blog_number = "";
                 
@@ -82,6 +83,7 @@
                 $title = str_replace("'", "''", "$posttitle");
                 $author = str_replace("'", "''", "$postauthor");
                 $category = str_replace("'", "''", "$postcategory");
+                $extracategory = str_replace("'", "''", "$postextracategory");
             
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -112,7 +114,7 @@
                 }
                 $conn->close();      
                 
-                 // Create connection in special table
+                 // Create new connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
                 if ($conn->connect_error) {
@@ -125,6 +127,14 @@
                 if ($result->num_rows > 0) { 
                     while($row = $result->fetch_assoc()) {    
                     $category_number = $row['category_id'];}
+                }
+            
+                // Get category_id extra category
+                $sql = "SELECT category_id FROM categories WHERE category = '$extracategory'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {    
+                    $extracategory_number = $row['category_id'];}
                 }
             
                 // Get blog_id
@@ -141,8 +151,16 @@
                 if ($conn->query($sql) === TRUE) {
                     echo "New record created successfully";} 
                 else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;}       
+            
+                // Link second/extra category and blog
+                $sql = "INSERT INTO articles_categories (blog_id, category_id)".
+                "VALUES ('$blog_number','$extracategory_number')";
+                if ($conn->query($sql) === TRUE) {
+                    echo "New record created successfully";} 
+                else {
                     echo "Error: " . $sql . "<br>" . $conn->error;}      
-                $conn->close();        
+                $conn->close(); 
         }
         
         // Check if there is a comment to put in the database
