@@ -13,7 +13,9 @@
         * {
             box-sizing: border-box;
         }
-        </style>   
+        </style>
+        <script>                
+        </script>     
      </head>
         
     <script>
@@ -23,7 +25,7 @@
     // Get all the posted blogs from the database to publish on the site
     function getmessages() {
         var xhr = new XMLHttpRequest();  
-        xhr.open('GET', "http://localhost/Scripto4/Scripto4.php", true); 
+        xhr.open('GET', "http://wijzijncodegorilla.nl/jorik/Scripto4/Scripto4.php", true); 
         xhr.onload = function (e) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
@@ -42,8 +44,9 @@
               console.error(xhr.statusText);
         };
         xhr.send(null);  
-    }       
-    </script>
+    }    
+        
+    </script>     
     
     <!-- Insert background with clouds -->
     <body background="achtergrond.jpg"> 
@@ -58,7 +61,7 @@
 
             <!-- Navigation bar links -->
             <div class="topnav">
-                <a href="Index4.html">Blogs</a>
+                <a href="index.html">Blogs</a>
                 <a href="Category4.html">Categorieën</a>
                 <a href="Scripto4.html">Schrijf zelf!</a>
                 <a href="Comment4.html">Commentaar</a>

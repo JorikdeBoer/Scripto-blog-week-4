@@ -13,10 +13,13 @@
         * {
             box-sizing: border-box;
         }
-        </style>   
+        </style>
+        <script>                 
+        </script>     
      </head>
         
     <script>
+    
     // Categories      
     var water = "water";
     var earth = "aarde";
@@ -49,7 +52,8 @@
               console.error(xhr.statusText);
         };
         xhr.send(null); 
-    }       
+    }    
+        
     </script>     
     
     <!-- Insert background with clouds -->
@@ -62,14 +66,16 @@
                 <p class="welcome"> <b> Scripto: jouw blog applicatie, jouw geschriften! </b></p>
                 <div style="clear:both"></div>  
             </div>     
+
             <!-- Navigation bar links -->
             <div class="topnav">
-                <a href="Index4.html">Blogs</a>
+                <a href="index.html">Blogs</a>
                 <a href="Category4.html">Categorieën</a>
                 <a href="Scripto4.html">Schrijf zelf!</a>
                 <a href="Comment4.html">Commentaar</a>
                 <div style="clear:both"></div>  
             </div>
+            
             <!-- Outputbox: All the blogs of the chosen category with author, title & text ordered by descending ID numbers -->
             <form name="output" action="">  
             <div id="Outputbox">    

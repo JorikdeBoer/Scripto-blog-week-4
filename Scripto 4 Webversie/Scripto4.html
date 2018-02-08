@@ -7,11 +7,15 @@
         
         <!-- Link to css style file -->
         <link type="text/css" rel="stylesheet" href="Scripto4.css" />
-	    <meta charset="utf-8">    
+	    <meta charset="utf-8">
+          
+        <script>                   
+        </script>     
      </head>
         
     <script>       
-    // Add category to category list WORK IN PROGRESS
+    
+    // Add category to category list
     function submitcategory() {
         var newcategory = document.bloginput.nieuwcategorie.value; 
         var xhr = new XMLHttpRequest();  
@@ -22,7 +26,7 @@
         xhr.send(value);           
     }
         
-    // Get array of all available categories  WORK IN PROGRESS
+    // Get array of all available categories
     function getcategories() {
         var xhr = new XMLHttpRequest(); 
         var categories = "categories";
@@ -85,7 +89,7 @@
         "dec" : "december"   
     }
         
-    // Couple input textarea with shortcuts
+    // couple text area with shortcuts
     window.onload = function() {
         var ta = document.getElementById("submit");
         var timer = 0;
@@ -96,7 +100,7 @@
             return shortcuts[$1.toLowerCase()];
             });
         }
-        // Text checked for shortcuts per time interval
+        // constant update
         ta.onkeydown = function() {
         clearTimeout(timer);
         timer = setTimeout(update, 200);
@@ -113,11 +117,11 @@
                 <!-- Name and slogan of the blog app -->
                 <p class="welcome"> <b> Scripto: jouw blog applicatie, jouw geschriften! </b></p>
                 <div style="clear:both"></div>
-            </div>   
-            
+            </div>     
+
             <!-- Navigation bar links -->
             <div class="topnav">
-                <a href="Index4.html">Blogs</a>
+                <a href="index.html">Blogs</a>
                 <a href="Category4.html">Categorieën</a>
                 <a href="Scripto4.html">Schrijf zelf!</a>
                 <a href="Comment4.html">Commentaar</a>
@@ -129,33 +133,48 @@
               <form name="bloginput" action="" method="post">
                 Auteur: <input type="text" name="author"><br><br>
                 Titel: <input type="text" name="title"><br><br>
+                <!-- Categorie: 
+                <input name="category" type="text" list="categories" />
+                <datalist id="categories">
+                      <option value="vuur">vuur</option>
+                      <option value="water">water</option>
+                      <option value="aarde">aarde</option>
+                      <option value="lucht">lucht</option>
+                </datalist><br><br> -->
+    
                 Categorie:     
                 <select id="testcategories" multiple></select>
-                <script>   
+                <script>
+                //getcategories();   
+                //console.log(allcategories);
+                //var allcat = allcategories.split("  ");    
                 var select = document.getElementById("testcategories");
+                //for(index in allcat){
+                //     select.options[select.options.length] = new Option(allcat[index], index);
+                //}
                 select.options[select.options.length] = new Option('vurige verhalen', 'vuur');
                 select.options[select.options.length] = new Option('kabbelende verhalen', 'water');
                 select.options[select.options.length] = new Option('aardige verhalen', 'aarde');
                 select.options[select.options.length] = new Option('luchtige verhalen', 'lucht');
                 select.options[select.options.length] = new Option('Informatie over de blog', 'Bloginfo');
-                    
-                // WORK IN PROGRESS
-                //getcategories();   
-                //console.log(allcategories);
-                //var allcat = allcategories.split("  "); 
-                //for(index in allcat){
-                //     select.options[select.options.length] = new Option(allcat[index], index);
-                //}  
-                </script>       
+                select.options[select.options.length] = new Option('nieuw', 'nieuw');    
+                </script>    
                 <br><br>   
                   
-                <!-- WORK IN PROGRESS  
                 Zelf categorie aanmaken: <input type="text" name="nieuwcategorie">
-                <input type="button" name="categorietoevoegen" onClick="submitcategory();" value="Voeg categorie toe aan lijst" /><br><br> -->  
-  
-                Tekst: <textarea id="text" name="text" rows="20" cols="90"></textarea>
+                <input type="button" name="categorietoevoegen" onClick="submitcategory();" value="Voeg categorie toe aan lijst" /><br><br>  
+                <!-- <select name="category">
+                <select name="category" id="categorylist">
+                </select><br><br> 
+                //<option selected value="water">Lucht (luchtige verhalen)</option>
+                //<option value="aarde">Aarde (aardige verhalen)</option>
+                //<option value="vuur">Water (kabbelende verhalen)</option>
+                //<option value="lucht">Vuur (vurige verhalen)</option>
+                </select><br><br> -->
+                Tekst: <textarea id="submit" name="text" rows="20" cols="90"></textarea>
                 <!-- Button to submit the new written blog to the database -->
                 <input type="button" name="publiceer" onClick="submitmessage();" value="Publiceer" /><br><br>  
+                  
               </form>
             </div> 
         </div>
