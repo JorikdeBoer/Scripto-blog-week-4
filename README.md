@@ -3,6 +3,8 @@ A blog application to share your writings with the world!
 
 An additional version to the previous Scripto blog application of last week (See the repository Scripto-Blog-Application) with new features based on the userstories as described in the CodeGorilla assignment of week 4 (discussed down below).
 
+The repository includes the normal version (Scripto4) and the version for the online demo (Scripto4 Webversie).
+
 ## Follow the progression: https://trello.com/b/sZldGU2x/scripto-week-2
 
 ## Look for the latest online demo at: http://wijzijncodegorilla.nl/jorik/Scripto4/
