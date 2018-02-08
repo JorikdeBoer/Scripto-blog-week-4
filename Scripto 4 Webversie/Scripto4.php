@@ -42,7 +42,7 @@
                 $servername = "localhost";
                 $username = "tomklru270_Scripto4user";
                 $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
+                $dbname = "tomklru270_Scripto4"; 
                 $comment_id = $_POST["comment_id"];
                 
                 // Create connection
@@ -246,7 +246,7 @@
                 $servername = "localhost";
                 $username = "tomklru270_Scripto4user";
                 $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
+                $dbname = "tomklru270_Scripto4";  
                  // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
@@ -272,7 +272,7 @@
                 $servername = "localhost";
                 $username = "tomklru270_Scripto4user";
                 $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";   
+                $dbname = "tomklru270_Scripto4"; 
                 $titel_blog = $_GET["titel_blog"];
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -295,13 +295,13 @@
         }
         
         // Check if there is the all_blogs keyword in the request: 
-        // get all comments!!
+        // get comments for certain blog!
         elseif (isset( $_GET["all_blogs"] )){
                 
                 $servername = "localhost";
                 $username = "tomklru270_Scripto4user";
                 $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";    
+                $dbname = "tomklru270_Scripto4";  
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
@@ -326,7 +326,7 @@
                 $servername = "localhost";
                 $username = "tomklru270_Scripto4user";
                 $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
+                $dbname = "tomklru270_Scripto4"; 
 
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);

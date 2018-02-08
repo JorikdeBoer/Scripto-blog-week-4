@@ -7,27 +7,21 @@
         
         <!-- Link to css style file -->
         <link type="text/css" rel="stylesheet" href="Comment4.css" />
-	    <meta charset="utf-8">
-          
-        <script>                   
-        </script>     
+	    <meta charset="utf-8">  
      </head>
         
-    <script>
-    // Test getblogtitles function
-    getblogtitles();
-        
+    <script>      
     // Send written comment to database 
     function submitcomment() {
         var comment = document.bloginput.text.value;  
         var titel_blog= document.bloginput.title.value; 
-        if(titel_blog=="Openingsblog"){
+        if(titel_blog == "Openingsblog"){
         alert("Not possible to comment on the selected blog");    
         }
         else{
             var xhr = new XMLHttpRequest();  
             var value = "mycomment=" + comment + "&titel_blog=" + titel_blog;
-            xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
+            xhr.open('POST', "http://wijzijncodegorilla.nl/jorik/Scripto4/Scripto4.php", true); 
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
             console.log(value);
             xhr.send(value); 
@@ -39,7 +33,7 @@
         var comment_id = document.output.comment_id.value;  
         var xhr = new XMLHttpRequest();  
         var value = "comment_id=" +comment_id;
-        xhr.open('POST', "http://localhost/Scripto4/Scripto4.php", true); 
+        xhr.open('POST', "http://wijzijncodegorilla.nl/jorik/Scripto4/Scripto4.php", true); 
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  
         console.log(value);
         xhr.send(value);          
@@ -48,9 +42,9 @@
     // Get comments from certain blog from database to publish on site
     function getblogcomments() {
         var xhr = new XMLHttpRequest();     
-        var titel_blog = document.output.blog.value;
+        var titel_blog = document.output.titelblog.value;
         console.log(titel_blog);
-        var url = "http://localhost/Scripto4/Scripto4.php?titel_blog="+titel_blog;
+        var url = "http://wijzijncodegorilla.nl/jorik/Scripto4/Scripto4.php?titel_blog="+titel_blog;
         xhr.open('GET', url, true);
         xhr.onload = function (e) {
             if (xhr.readyState === xhr.DONE) {
@@ -105,7 +99,7 @@
             return shortcuts[$1.toLowerCase()];
             });
         }
-        // constant update
+        // Text checked for shortcuts per time interval
         ta.onkeydown = function() {
         clearTimeout(timer);
         timer = setTimeout(update, 200);
@@ -120,7 +114,7 @@
         <div id="Menu">
             <div id="Welcome">
                 <!-- Name and slogan of the blog app -->
-                <p class="welcome"> <b> Scripto: jouw blog applicatie, jouw geschriften! </b></p>
+                <p class="welcome"> <b> Scripto: jouw blog applicatie, jouw commentaar! </b></p>
                 <div style="clear:both"></div>
             </div>     
 
@@ -133,25 +127,27 @@
                 <div style="clear:both"></div>  
             </div>    
             
-            <!-- Inputbox: Your written comment with title of the blog the comment is directed to & your comment itself-->
+            <!-- Inputbox: Write your comment with the title of the blog-->
             <div id="Inputbox"> 
              <h1>Schrijf hier je commentaar!</h1>
               <form name="bloginput" action="" method="post">  
                 Titel van bijbehorende blog: <input type="text" name="title"><br><br>
-                Jouw commentaar: <textarea id="submit" name="text" rows="5" cols="90"></textarea>
+                Jouw commentaar: <textarea id="text" name="text" rows="5" cols="90"></textarea>
                 <!-- Button to submit the new written blog to the database -->
                 <input type="button" name="publiceer" onClick="submitcomment();" value="Publiceer commentaar" />
               </form><br><br> 
             
-            <!-- Outputbox: All the commets for a certain blog -->
+            <!-- Outputbox: All the comments linked to a certain blog -->
             <form name="output" action="">  
               <div id="Outputbox">    
                 <div class="column">
                 <h1>Lees hier het laatste commentaar, wellicht van uw hand!</h1>
-                 Titel van bijbehorende blog:<input name="blog" placeholder="Openingsblog" type="text" list="blogs" />
+                Titel van bijbehorende blog: <input type="titelblog" name="titelblog"><br><br>    
+                <!-- WORK IN PROGRESS
+                Titel van bijbehorende blog:<input name="blog" placeholder="Openingsblog" type="text" list="blogs" />
                 <datalist id="blogs">
                   <option value="Commentaar">Commentaar</option>
-                </datalist><br><br>     
+                </datalist><br><br> -->     
                   <textarea name="outputtext" cols="90" rows="12">
                   </textarea>
                 <!-- Button to refresh the outputbox to include new posted blogs since page was loaded --> 

@@ -13,13 +13,10 @@
         * {
             box-sizing: border-box;
         }
-        </style>
-        <script>                 
-        </script>     
+        </style>   
      </head>
         
     <script>
-    
     // Categories      
     var water = "water";
     var earth = "aarde";
@@ -32,7 +29,7 @@
         var xhr = new XMLHttpRequest();     
         var cat = input;
         console.log(cat);
-        var url = "http://localhost/Scripto4/Scripto4.php?category="+cat;
+        var url = "http://wijzijncodegorilla.nl/jorik/Scripto4/Scripto4.php?category="+cat;
         xhr.open('GET', url, true);
         xhr.onload = function (e) {
             if (xhr.readyState === xhr.DONE) {
@@ -52,8 +49,7 @@
               console.error(xhr.statusText);
         };
         xhr.send(null); 
-    }    
-        
+    }       
     </script>     
     
     <!-- Insert background with clouds -->
@@ -66,7 +62,6 @@
                 <p class="welcome"> <b> Scripto: jouw blog applicatie, jouw geschriften! </b></p>
                 <div style="clear:both"></div>  
             </div>     
-
             <!-- Navigation bar links -->
             <div class="topnav">
                 <a href="index.html">Blogs</a>
@@ -75,7 +70,6 @@
                 <a href="Comment4.html">Commentaar</a>
                 <div style="clear:both"></div>  
             </div>
-            
             <!-- Outputbox: All the blogs of the chosen category with author, title & text ordered by descending ID numbers -->
             <form name="output" action="">  
             <div id="Outputbox">    
