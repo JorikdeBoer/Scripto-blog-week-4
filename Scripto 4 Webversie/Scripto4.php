@@ -7,20 +7,20 @@
 
     //Global variable
     $blogs_numbers = array();
-    
+    $GLOBALS['servername'] = "localhost";
+    $GLOBALS['password'] = "wachtwoord";
+    $GLOBALS['dbname'] = "tomklru270_Scripto4";
+    $GLOBALS['username'] = "tomklru270_Scripto4user";
+  
     // Code to delete comments
     if ($verb == 'POST'){
         
         // Check if there is a category to add to the list
         if (isset( $_POST["mycategory"] )){
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
+               
                 $newcategory = $_POST["mycategory"];
-            
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -39,14 +39,9 @@
         // Check if there is a comment_id to remove comment
         elseif (isset( $_POST["comment_id"] )){
             
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
                 $comment_id = $_POST["comment_id"];
-                
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -66,14 +61,11 @@
         // Check if there is a blog to put in the database
         elseif (isset( $_POST["myblog"] )){
             
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
                 $posttext = $_POST["myblog"];
                 $posttitle = $_POST["title"];
                 $postauthor = $_POST["author"];
                 $postcategory = $_POST["category"];
+                $postextracategory = $_POST["extracategory"];
                 $category_number = "";
                 $blog_number = "";
                 
@@ -82,9 +74,10 @@
                 $title = str_replace("'", "''", "$posttitle");
                 $author = str_replace("'", "''", "$postauthor");
                 $category = str_replace("'", "''", "$postcategory");
+                $extracategory = str_replace("'", "''", "$postextracategory");
             
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -112,8 +105,8 @@
                 }
                 $conn->close();      
                 
-                 // Create connection in special table
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                 // Create new connection
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -125,6 +118,14 @@
                 if ($result->num_rows > 0) { 
                     while($row = $result->fetch_assoc()) {    
                     $category_number = $row['category_id'];}
+                }
+            
+                // Get category_id extra category
+                $sql = "SELECT category_id FROM categories WHERE category = '$extracategory'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {    
+                    $extracategory_number = $row['category_id'];}
                 }
             
                 // Get blog_id
@@ -141,17 +142,21 @@
                 if ($conn->query($sql) === TRUE) {
                     echo "New record created successfully";} 
                 else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;}       
+            
+                // Link second/extra category and blog
+                $sql = "INSERT INTO articles_categories (blog_id, category_id)".
+                "VALUES ('$blog_number','$extracategory_number')";
+                if ($conn->query($sql) === TRUE) {
+                    echo "New record created successfully";} 
+                else {
                     echo "Error: " . $sql . "<br>" . $conn->error;}      
-                $conn->close();        
+                $conn->close(); 
         }
         
         // Check if there is a comment to put in the database
         elseif (isset( $_POST["mycomment"] )){
             
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
                 $posttext = $_POST["mycomment"];
                 $posttitle = $_POST["titel_blog"];
                 
@@ -160,7 +165,7 @@
                 $title = str_replace("'", "''", "$posttitle");
             
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -186,14 +191,11 @@
         
         // Get blogs from certain category!
         if (isset( $_GET["category"] )){
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
+
                 $category = $_GET["category"];
             
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -243,12 +245,9 @@
         
         // Get all available category names!
         elseif (isset( $_GET["categories"] )){
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
+
                  // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -269,13 +268,10 @@
         // Check if there is a blog titel selection in the request: 
         // get comments for certain blog!
         elseif (isset( $_GET["titel_blog"] )){
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
+ 
                 $titel_blog = $_GET["titel_blog"];
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -298,12 +294,8 @@
         // get comments for certain blog!
         elseif (isset( $_GET["all_blogs"] )){
                 
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4";  
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}
@@ -323,13 +315,8 @@
         
         // No category selection in the request: get all blogs!
         else {    
-                $servername = "localhost";
-                $username = "tomklru270_Scripto4user";
-                $password = "wachtwoord";
-                $dbname = "tomklru270_Scripto4"; 
-
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($GLOBALS['servername'], $GLOBALS['username'], $GLOBALS['password'], $GLOBALS['dbname']);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);}

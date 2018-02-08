@@ -45,6 +45,7 @@ ID     Als een:    Wil ik:
 - W3-005
 - W3-006
 
+
 # Screenshots
 ![Alt text](https://github.com/JorikdeBoer/Scripto-blog-week-4/blob/master/Scriptoblogpage.png?raw=true "Scripto blog homepage")
 
