@@ -4,20 +4,33 @@
     <head>
         <!-- The comment page of the Scripto blog application -->
         <title>	Scripto Blog application </title>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
         <!-- Link to css style file -->
         <link type="text/css" rel="stylesheet" href="Comment4.css" />
 	    <meta charset="utf-8">  
      </head>
         
-    <script>      
+    <script>   
+    // Global variable
+    var listofblockedtitles = ["Openingsblog"];
+        
+    // add title to blockedtitleslist of blogs without comments
+    function blockblogtitle(){
+        listofblockedtitles.push(document.output.blog_titel.value);    
+    }
+        
     // Send written comment to database 
     function submitcomment() {
         var comment = document.bloginput.text.value;  
         var titel_blog= document.bloginput.title.value; 
-        if(titel_blog == "Openingsblog"){
+        if ( $.inArray(titel_blog, listofblockedtitles) > -1 ) {
         alert("Not possible to comment on the selected blog");    
         }
+        //if(listofblockedtitles.indexOf(titel_blog) > -1){
+        //alert("Not possible to comment on the selected blog");    
+        //}
         else{
             var xhr = new XMLHttpRequest();  
             var value = "mycomment=" + comment + "&titel_blog=" + titel_blog;
@@ -152,10 +165,13 @@
                   </textarea>
                 <!-- Button to refresh the outputbox to include new posted blogs since page was loaded --> 
                 <input type="button" name="ververs" onClick="getblogcomments()" value="Ververs comments" /> 
-                <br><br>     
-                ID van te verwijderen comment:<input name="comment_id" placeholder="id nummer comment" type="text" />    
+                <br><br>    
+                ID van te verwijderen comment: <input name="comment_id" placeholder="id nummer comment" type="text" />    
                 <!-- Button to delete the comment with the selected id -->     
-                <input type="button" name="delete" onClick="deletecomment()" value="Delete comment" />        
+                <input type="button" name="delete" onClick="deletecomment()" value="Verwijder comment" /><br><br>  
+                Titel van blog om commentaar uit te schakelen: <input name="blog_titel" placeholder="titel blog" type="text" />    
+                <!-- Button to delete the comment with the selected id -->     
+                <input type="button" name="block" onClick="blockblogtitle()" value="Blokkeer commentaar bij deze blog" />      
                 </div>
               </div> 
             </form>    
