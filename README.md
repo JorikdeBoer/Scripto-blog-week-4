@@ -1,17 +1,24 @@
 # Scripto blog week 4
-A blog application to share your writings with the world!
+A blog application to share your writings and comments with the world!
 
-An additional version to the previous Scripto blog application of last week (See the repository Scripto-Blog-Application) with new features based on the userstories as described in the CodeGorilla assignment of week 4 (discussed down below).
+An additional version to the previous Scripto blog application of last week (See the repository Scripto-Blog-Application) with new features based on the userstories as described in the CodeGorilla assignment of week 4 (discussed down below) and a working online demo.
 
-The repository includes the normal version (Scripto4) and the version for the online demo (Scripto4 Webversie).
+The repository includes the normal version (Scripto4) and the version for the online demo (Scripto 4 Webversie).
 
 ## Follow the progression: https://trello.com/b/sZldGU2x/scripto-week-2
+
+### Workflow
+- Monday: reading assignment, recycle version blog last week, first version text-expander
+- Tuesday: first version comment section, add comments to database
+- Wednesday: made deletion of comment possible, trying to make first online demo working
+- Thursday: made two categories for blog possible, disable comments per blog possible, new version of online demo  
+- Friday: made blog more user-friendly, new version online demo, improved readme Github, fixed bugs
 
 ## Look for the latest online demo at: http://wijzijncodegorilla.nl/jorik/Scripto4/
 
 ## Userstories
 The Userstories of the CodeGorilla assignment for week 3 (in Dutch):
-ID     Als een:    Wil ik:
+- ID     Als een:    Wil ik:
 - W3-001 Blogger:    Artikelen op mijn blog plaatsen.  
 - W3-002 Lezer:      Een overzicht hebben van de artikelen die mijn favoriete blogger heeft geschreven met het meest recente artikel bovenaan.
 - W3-003 Blogger:    Een artikel aan één categorie kunnen koppelen.
@@ -22,7 +29,7 @@ ID     Als een:    Wil ik:
 - W3-008 Blogger:    Een afbeeldingen in een artikel kunnen plaatsen.
 
 The Userstories of the CodeGorilla assignment for week 4 (in Dutch):
-ID     Als een:    Wil ik:
+- ID     Als een:    Wil ik:
 - W4-001 Blogger:    Een text-expander die als ik een artikel aan het schrijven ben door mij zelf gedefinieerde afkortingen die ik type direct omzet in de volledige tekst.
 - W4-002 Lezer:      Anoniem commentaar kunnen geven op een artikel.
 - W4-003 Lezer:      Artikelen in een bepaalde categorie kunnen selecteren met behulp van een kolom zonder dat de pagina opnieuw wordt ingelezen.
@@ -34,17 +41,16 @@ ID     Als een:    Wil ik:
 - W3-002
 - W3-003
 - W3-004
+- W3-006 (Note: A blog can have a maximum of two categories)
 
 - W4-001
 - W4-002
 - W4-003
 - W4-004
-- W4-005
+- W4-005 (Note: Title can be put in hard code to be blocked permanently or in the user interface to be blocked for the length of the session)
 
 ### WORK IN PROGRESS
 - W3-005
-- W3-006
-
 
 # Screenshots
 ![Alt text](https://github.com/JorikdeBoer/Scripto-blog-week-4/blob/master/Scriptoblogpage.png?raw=true "Scripto blog homepage")
