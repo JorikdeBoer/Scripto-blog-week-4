@@ -211,7 +211,7 @@
                     }
                 }
                 // Get blog_id's
-                $sql = "SELECT blog_id FROM articles_categories WHERE category_id = '$category_number'";
+                $sql = "SELECT blog_id FROM articles_categories WHERE category_id = '$category_number' ORDER BY blog_id DESC";
                 $result = $conn->query($sql);
                 //print_r($result);
                 if ($result->num_rows > 0) { 

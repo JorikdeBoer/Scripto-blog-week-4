@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <!-- The writing page of the Scripto blog application -->
+        <!-- The writing a blog page of the Scripto blog application -->
         <title>	Scripto Blog application </title>
         
         <!-- Link to css style file -->
@@ -54,7 +54,7 @@
         var author = document.bloginput.author.value; 
         var title = document.bloginput.title.value;  
         var blog = document.bloginput.text.value;  
-        var category = document.bloginput.testcategories.value; 
+        var category = document.bloginput.categories.value; 
         var extracategory = document.bloginput.extracategories.value; 
         var xhr = new XMLHttpRequest();  
         var value = "myblog=" + blog + "&author=" + author + "&title=" + title + "&category=" + category + "&extracategory=" + extracategory;
@@ -126,16 +126,17 @@
             </div>    
             
             <!-- Inputbox: Your written blog with author, title, category & text-->
-            <div id="Inputbox"> <br>   
+            <div id="Inputbox"> <br> 
+              <h1>Schrijf hier je blog!</h1>    
               <form name="bloginput" action="" method="post">
                 Auteur: <input type="text" name="author"><br><br>
                 Titel: <input type="text" name="title"><br><br>
                 Categorie:     
-                <select id="testcategories">
+                <select id="categories">
                 <option style="display:none;" value="" selected disabled hidden>Kies categorie</option>
                 </select>
                 <script>   
-                var select = document.getElementById("testcategories");  
+                var select = document.getElementById("categories");  
                 select.options[select.options.length] = new Option('vurige verhalen', 'vuur');
                 select.options[select.options.length] = new Option('kabbelende verhalen', 'water');
                 select.options[select.options.length] = new Option('aardige verhalen', 'aarde');
@@ -170,7 +171,7 @@
                 Zelf categorie aanmaken: <input type="text" name="nieuwcategorie">
                 <input type="button" name="categorietoevoegen" onClick="submitcategory();" value="Voeg categorie toe aan lijst" /><br><br> -->  
   
-                Tekst: <textarea id="text" name="text" rows="20" cols="90"></textarea>
+                Tekst: <textarea id="text" name="text" rows="20" cols="90"></textarea><br>
                 <!-- Button to submit the new written blog to the database -->
                 <input type="button" name="publiceer" onClick="submitmessage();" value="Publiceer" /><br><br>  
               </form>
