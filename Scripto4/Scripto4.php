@@ -145,12 +145,13 @@
                     echo "Error: " . $sql . "<br>" . $conn->error;}       
             
                 // Link second/extra category and blog
+                while($category_number != $extracategory_number){
                 $sql = "INSERT INTO articles_categories (blog_id, category_id)".
                 "VALUES ('$blog_number','$extracategory_number')";
                 if ($conn->query($sql) === TRUE) {
                     echo "New record created successfully";} 
                 else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;}      
+                    echo "Error: " . $sql . "<br>" . $conn->error;}}
                 $conn->close(); 
         }
         
