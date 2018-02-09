@@ -7,6 +7,14 @@ The repository includes the normal version (Scripto4) and the version for the on
 
 ## Follow the progression: https://trello.com/b/sZldGU2x/scripto-week-2
 
+## Description of the application
+The application includes for html pages: "blogs", "categoriën", "Schrijf zelf" en "Commentaar"
+- "Blogs" shows all the blogs published with the most recent on top. 
+The button on the bottom of the page refreshes the blogs with the most recent blogs posted since the page was loaded.
+- "Categoriën" gives five buttons on top of the page, one for each standard category. When selected all the blogs of a certain category are loaded with the most recent blog on top.
+- "Schrijf zelf" gives the user the opportunity to write a blog, including author, title, category (a second category) and the blog text itself. With the button on the bottom of the page the blog is published and send to the database. From that moment the blog is visible on the "Blogs" and "Categoriën" pages.
+- "Commentaar" gives the user the opportunity to leave a comment at a certain blog post and read other comments linked to a certain blog. On the bottom of the page the user can give the id of a comment he/she wants to delete and the user can give the title of a blog to shutdown its comment section for the rest of the session. To block a comment section permanently, the title of a blog can be written in the code of comment4.html As an example, the blog "Openingsblog" has a permanent blocked comment section.
+
 ### Workflow
 - Monday: reading assignment, recycle version blog last week, first version text-expander
 - Tuesday: first version comment section, add comments to database
